@@ -2,8 +2,8 @@
     "version": 2,
     "redirects": [
         {
-            "src": "/svg-path-editor((?!\/).*)",
-            "dest": "/svg-path-editor/$1"
+            "src": "/([^\/]+)((?<!\/).*)",
+            "dest": "/$1/$2"
         }
     ]
 }
