@@ -14,7 +14,7 @@
                             [ngModel]="rawPath"
                             (ngModelChange)="reloadPath($event, true)"
                             class="app-input"
-                            style="padding-top:5px;height:100px;"
+                            style="padding-top:8px;height:100px;"
                             placeholder="&#10;在此处粘贴 SVG Path"
                             (focus)="setHistoryDisabled(true)"
                             (blur)="setHistoryDisabled(false)"
@@ -517,7 +517,7 @@
     <ng-template matMenuContent let-image="image">
         <div mat-menu-item [disableRipple]="true" (click)="$event.stopPropagation()">
             <mat-icon>opacity</mat-icon>
-            <ng-container>Opacity</ng-container>
+            <ng-container>不透明度</ng-container>
             <div style="display:inline-block; width:180px;">
                 <mat-slider min="0" max="1" step="0.01" style="margin:0 16px; min-width:100px" color="accent">
                     <input matSliderThumb [(ngModel)]="image.opacity">
@@ -525,12 +525,13 @@
                 {{image.opacity}}
             </div>
         </div>
-        <button mat-menu-item (click)="image.preserveAspectRatio = !image.preserveAspectRatio; $event.stopPropagation()">
+        <div mat-menu-item [disableRipple]="true" (click)="image.preserveAspectRatio = !image.preserveAspectRatio; $event.stopPropagation()">
             <mat-icon>aspect_ratio</mat-icon>
-            <ng-container>Toggle Preserve Aspect Ratio</ng-container>
-        </button>
+            <ng-container>保持纵横比</ng-container>
+            <mat-checkbox style="padding-left:100px;" [ngModel]="image.preserveAspectRatio"></mat-checkbox>
+        </div>
         <button mat-menu-item (click)="deleteImage(image)">
-            <mat-icon>delete</mat-icon> Delete
+            <mat-icon>delete</mat-icon> 删除
         </button>
     </ng-template>
 </mat-menu>
