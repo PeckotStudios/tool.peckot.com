@@ -5,7 +5,7 @@
   <div class="upload-button-row">
     <button type="button" mat-raised-button (click)="fileInput.click()" (drop)="onDrop($event)">选择文件</button>
     <img *ngIf="data" class="preview" [src]="displayableData" />
-    <span class="filename">{{name}}</span>
+    <span class="filename">{{ name.length >= 30 ? name.substring(30).concat('...') : name }}</span>
   </div>
   <mat-form-field>
     <mat-label>X</mat-label>
