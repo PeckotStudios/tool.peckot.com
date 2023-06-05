@@ -2,8 +2,8 @@
     "version": 2,
     "rewrites": [
       {
-        "source": "/svg-path-editor",
-        "destination": "/svg-path-editor/"
+        "source": "/svg-path-editor/?(.*)",
+        "destination": "/svg-path-editor/$1"
       }
     ]
   }
