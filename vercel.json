@@ -1,9 +1,9 @@
 {
     "version": 2,
-    "routes": [
+    "redirects": [
       {
-        "src": "/(.*)",
-        "dest": "/$1/"
+        "source": "/svg-path-editor",
+        "destination": "/svg-path-editor/"
       }
     ]
   }
