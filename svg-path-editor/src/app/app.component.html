@@ -6,16 +6,16 @@
             <mat-icon>arrow_left</mat-icon>
         </button>
         <div class="left-column" cdk-scrollable>
-            <app-expandable panelTitle="路径" [panelInfo]="rawPath.length.toString()" [opened]="true">
+            <app-expandable panelTitle="文件" [panelInfo]="rawPath.length.toString()" [opened]="true">
                 <div class="row">
-                    <div class="input-block" style="flex-grow:1"> 
-                        <label class="opaque">Path参数值</label>
+                    <div class="input-block" style="flex-grow:1;"> 
+                        <label class="opaque">Path</label>
                         <textarea
                             [ngModel]="rawPath"
                             (ngModelChange)="reloadPath($event, true)"
                             class="app-input"
-                            style="height:100px;"
-                            placeholder="在此处粘贴 SVG 路径"
+                            style="padding-top:5px;height:100px;"
+                            placeholder="&#10;在此处粘贴 SVG Path"
                             (focus)="setHistoryDisabled(true)"
                             (blur)="setHistoryDisabled(false)"
                         ></textarea>
@@ -29,7 +29,7 @@
                     <button mat-mini-fab
                         color="primary"
                         style="transform: none; margin:0 4px;"
-                        matTooltip="清空路径"
+                        matTooltip="清空"
                         matTooltipPosition="below"
                         matTooltipClass="app-tooltip"
                         (click)="reloadPath('', false)"
@@ -42,7 +42,7 @@
                         style="transform: none; margin:0 10px 0 auto;"
                         [matMenuTriggerFor]="appCreate"
                         [matMenuTriggerData]="{item:null, idx:-1}"
-                        matTooltip="添加新指令"
+                        matTooltip="添加新命令"
                         matTooltipPosition="below"
                         matTooltipClass="app-tooltip"
                     >
@@ -54,20 +54,22 @@
             <app-expandable panelTitle="配置" [opened]="true">
                 <div class="row">
                     <div class="input-block" [ngClass]="{'disabled': cfg.viewPortLocked }">
-                        <label>X坐标</label>
+                        <label>X</label>
                         <input
                             class="app-input"
                             appFormatter
+                            style="padding-top:18px;min-height:40px;"
                             [numberValue]="cfg.viewPortX"
                             (numberValueChange)="updateViewPort($event, cfg.viewPortY, cfg.viewPortWidth, cfg.viewPortHeight)"
                             [disabled]="cfg.viewPortLocked" 
                         >
                     </div>
                     <div class="input-block" [ngClass]="{'disabled': cfg.viewPortLocked }">
-                        <label>Y坐标</label>
+                        <label>Y</label>
                         <input
                             class="app-input"
                             appFormatter
+                            style="padding-top:18px;min-height:40px;"
                             [numberValue]="cfg.viewPortY"
                             (numberValueChange)="updateViewPort(cfg.viewPortX, $event, cfg.viewPortWidth, cfg.viewPortHeight)"
                             [disabled]="cfg.viewPortLocked" 
@@ -78,6 +80,7 @@
                         <input
                             class="app-input"
                             appFormatter
+                            style="padding-top:18px;min-height:40px;"
                             formatterType="positive-float"
                             [numberValue]="cfg.viewPortWidth"
                             (numberValueChange)="updateViewPort(cfg.viewPortX, cfg.viewPortY, $event, null)"
@@ -89,6 +92,7 @@
                         <input
                             class="app-input"
                             appFormatter
+                            style="padding-top:18px;min-height:40px;"
                             formatterType="positive-float"
                             [numberValue]="cfg.viewPortHeight"
                             (numberValueChange)="updateViewPort(cfg.viewPortX, cfg.viewPortY, null, $event)"
@@ -99,7 +103,7 @@
                     <button
                         mat-flat-button
                         (click)="cfg.viewPortLocked = !cfg.viewPortLocked"
-                        [matTooltip]="cfg.viewPortLocked ? 'Unlock viewBox' : 'Lock viewBox'"
+                        [matTooltip]="cfg.viewPortLocked ? '取消锁定视图' : '锁定视图'"
                         matTooltipPosition="right"
                         class="mat-flat-button"
                     >
@@ -119,48 +123,50 @@
                         <input
                             class="app-input"
                             appFormatter
+                            style="padding-top:18px;min-height:40px;"
                             formatterType="positive-integer"
                             [(numberValue)]="cfg.decimalPrecision"
                             [disabled]="cfg.snapToGrid">
                     </div>
                 </div>
                 <div class="row">
-                    <mat-checkbox [(ngModel)]="cfg.showTicks" style="flex:1">Show Ticks</mat-checkbox>
+                    <mat-checkbox [(ngModel)]="cfg.showTicks" style="flex:1">坐标轴数字</mat-checkbox>
                     <div class="input-block" style="flex:1"
                         [ngClass]="{'disabled': !cfg.showTicks }"
                     >
-                        <label>Interval</label>
+                        <label>数字间隔</label>
                         <input
                             class="app-input"
                             appFormatter
+                            style="padding-top:18px;min-height:40px;"
                             formatterType="positive-integer"
                             [(numberValue)]="cfg.tickInterval" 
                             [disabled]="!cfg.showTicks">
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="padding-top:10px;">
                     <mat-checkbox [(ngModel)]="cfg.filled" style="flex:1">填充</mat-checkbox>
                     <mat-checkbox [(ngModel)]="cfg.preview" style="flex:1">预览</mat-checkbox>
-                    <mat-checkbox [ngModel]="cfg.minifyOutput" (ngModelChange)="cfg.minifyOutput=$event;afterModelChange()" style="flex:1">Minify output</mat-checkbox>
+                    <mat-checkbox [ngModel]="cfg.minifyOutput" (ngModelChange)="cfg.minifyOutput=$event;afterModelChange()" style="flex:1">压缩大小</mat-checkbox>
                 </div>
 
             </app-expandable>
 
-            <app-expandable panelTitle="路径值操作" [opened]="true">
+            <app-expandable panelTitle="变换" [opened]="true">
                 <div class="row path-operations-grid">
                     <div class="input-block" style="flex:1">
-                        <label>X缩放倍数</label>
-                        <input appFormatter [(numberValue)]="scaleX" class="app-input" >
+                        <label>缩放 X</label>
+                        <input appFormatter style="padding-top:18px;min-height:40px;" [(numberValue)]="scaleX" class="app-input" >
                     </div>
                     <div class="input-block" style="flex:1">
-                        <label>Y缩放倍数</label>
-                        <input appFormatter [(numberValue)]="scaleY" class="app-input">
+                        <label>缩放 Y</label>
+                        <input appFormatter style="padding-top:18px;min-height:40px;" [(numberValue)]="scaleY" class="app-input">
                     </div>
                     <button
                         mat-flat-button
                         (click)="scale(scaleX, scaleY)"
-                        style="flex:1"
-                        matTooltip="使用提供的值缩放整个路径"
+                        style="min-height:40px;flex:1"
+                        matTooltip="使用提供的值缩放 SVG Path"
                         matTooltipPosition="right"
                         class="mat-flat-button"
                     >缩放</button>
@@ -168,18 +174,18 @@
 
                 <div class="row path-operations-grid">
                     <div class="input-block" style="flex:1">
-                        <label>X平移数值</label>
-                        <input appFormatter [(numberValue)]="translateX" class="app-input">
+                        <label>平移 X</label>
+                        <input appFormatter style="padding-top:18px;min-height:40px;" [(numberValue)]="translateX" class="app-input">
                     </div>
                     <div class="input-block" style="flex:1">
-                        <label>Y平移数值</label>
-                        <input appFormatter [(numberValue)]="translateY" class="app-input">
+                        <label>平移 Y</label>
+                        <input appFormatter style="padding-top:18px;min-height:40px;" [(numberValue)]="translateY" class="app-input">
                     </div>
                     <button
                         mat-flat-button
                         (click)="translate(translateX, translateY)"
-                        style="flex:1"
-                        matTooltip="使用提供的值平移整个路径"
+                        style="min-height:40px;flex:1"
+                        matTooltip="使用提供的值平移 SVG Path"
                         matTooltipPosition="right"
                         class="mat-flat-button"
                     >平移</button>
@@ -187,22 +193,22 @@
 
                 <div class="row path-operations-grid4">
                     <div class="input-block" style="flex:1">
-                        <label>原点X坐标</label>
-                        <input appFormatter [(numberValue)]="rotateX" class="app-input">
+                        <label>原点 X</label>
+                        <input appFormatter style="padding-top:18px;min-height:40px;" [(numberValue)]="rotateX" class="app-input">
                     </div>
                     <div class="input-block" style="flex:1">
-                        <label>原点Y坐标</label>
-                        <input appFormatter [(numberValue)]="rotateY" class="app-input">
+                        <label>原点 Y</label>
+                        <input appFormatter style="padding-top:18px;min-height:40px;" [(numberValue)]="rotateY" class="app-input">
                     </div>
                     <div class="input-block" style="flex:1">
                         <label>角度</label>
-                        <input appFormatter suffix="°" [(numberValue)]="rotateAngle" class="app-input">
+                        <input appFormatter style="padding-top:18px;min-height:40px;" suffix="°" [(numberValue)]="rotateAngle" class="app-input">
                     </div>
                     <button
                         mat-flat-button 
                         (click)="rotate(rotateX, rotateY, rotateAngle)"
-                        style="flex:1"
-                        matTooltip="将整个路径绕原点旋转指定角度"
+                        style="min-height:40px;flex:1"
+                        matTooltip="绕指定点以指定角度旋转 SVG Path"
                         matTooltipPosition="right"
                         class="mat-flat-button"
                     >旋转</button>
@@ -211,13 +217,13 @@
                 <div class="row path-operations-grid">
                     <div class="input-block" style="grid-column: span 2;">
                         <label>小数位数</label>
-                        <input appFormatter formatterType="positive-integer" [(numberValue)]="roundValuesDecimals" class="app-input">
+                        <input appFormatter style="padding-top:18px;min-height:40px;" formatterType="positive-integer" [(numberValue)]="roundValuesDecimals" class="app-input">
                     </div>
                     <button
                         mat-flat-button 
                         (click)="roundValues(roundValuesDecimals)"
-                        style="flex:1"
-                        matTooltip="按输入的保留小数位数四舍五入整个路径"
+                        style="min-height:40px;flex:1"
+                        matTooltip="按输入的保留小数位数四舍五入整个 SVG Path"
                         matTooltipPosition="right"
                         class="mat-flat-button"
                     >舍入</button>
@@ -226,21 +232,21 @@
                 <div class="row">
                     <button mat-flat-button 
                         (click)="setRelative(true)"
-                        matTooltip="将所有命令转换为相对位置指令"
-                        style="flex:1"
+                        matTooltip="将所有命令转换为相对位置"
+                        style="min-height:40px;flex:1"
                         class="mat-flat-button"
-                    >转换成相对位置指令</button>
+                    >使用相对位置</button>
                     <button mat-flat-button 
                         (click)="setRelative(false)"
-                        matTooltip="将所有命令转换为绝对位置指令"
-                        style="flex:1"
+                        matTooltip="将所有命令转换为绝对位置"
+                        style="min-height:40px;flex:1"
                         class="mat-flat-button"
-                    >转换成绝对位置指令</button>
+                    >使用绝对位置</button>
                 </div>
             </app-expandable>
 
 
-            <app-expandable panelTitle="指令" [opened]="true">
+            <app-expandable panelTitle="命令" [opened]="true">
                 <div *ngFor="let item of parsedPath.path; let j=index" 
                     (mouseenter)="hoveredItem=item"
                     (mouseleave)="hoveredItem=null"
@@ -364,7 +370,7 @@
 
             <button mat-mini-fab
                 [color]="isEditingImages ? 'accent' : 'primary'"
-                [matTooltip]="isEditingImages ? '' : '切换图像管理模式'"
+                [matTooltip]="isEditingImages ? '' : '背景图片'"
                 matTooltipPosition="below"
                 style="margin-right: 24px"
                 (click)="toggleImageEditing(uploader)"
@@ -456,8 +462,11 @@
 
 
 <div *ngIf="isLeftPanelOpened"  class="footer">
-    <a href="https://github.com/Yqnn/svg-path-editor" target="_blank">
+    <a href="https://github.com/Peckot-Studios/tool.peckot.com" target="_blank">
         <mat-icon svgIcon="github"></mat-icon> GitHub
+    </a>
+    <a href="https://github.com/Yqnn/svg-path-editor" target="_blank">
+        <mat-icon svgIcon="github"></mat-icon> Code
     </a>
     <a href="https://github.com/sponsors/Yqnn" target="_blank">
         <mat-icon svgIcon="sponsor" class="sponsor"></mat-icon> Sponsor
@@ -470,7 +479,7 @@
     <ng-template matMenuContent let-item="item"  let-idx="idx">
         <button mat-menu-item [matMenuTriggerFor]="appCreate" [matMenuTriggerData]="{item:item, idx:idx}">
             <mat-icon>add</mat-icon>
-            Insert After
+            添加命令
         </button>
         <button mat-menu-item [matMenuTriggerFor]="appCreate" [matMenuTriggerData]="{item:item, idx:idx, convert:true}">
             <mat-icon>swap_horiz</mat-icon>
@@ -490,16 +499,16 @@
 
 <mat-menu #appCreate="matMenu">
     <ng-template matMenuContent let-item="item"  let-idx="idx" let-convert="convert">
-        <button mat-menu-item (click)="insert('M', item, convert)" [disabled]="convert?!canConvert(item,'M'):!canInsertAfter(item, 'M')"><strong>M</strong> Move to</button>
-        <button mat-menu-item (click)="insert('L', item, convert)" [disabled]="convert?!canConvert(item,'L'):!canInsertAfter(item, 'L')"><strong>L</strong> Line to</button>
-        <button mat-menu-item (click)="insert('V', item, convert)" [disabled]="convert?!canConvert(item,'V'):!canInsertAfter(item, 'V')"><strong>V</strong> Vertical Line to</button>
-        <button mat-menu-item (click)="insert('H', item, convert)" [disabled]="convert?!canConvert(item,'H'):!canInsertAfter(item, 'H')"><strong>H</strong> Horizontal Line to</button>
-        <button mat-menu-item (click)="insert('C', item, convert)" [disabled]="convert?!canConvert(item,'C'):!canInsertAfter(item, 'C')"><strong>C</strong> Curve to</button>
-        <button mat-menu-item (click)="insert('S', item, convert)" [disabled]="convert?!canConvert(item,'S'):!canInsertAfter(item, 'S')"><strong>S</strong> Shorthand Curve to</button>
-        <button mat-menu-item (click)="insert('Q', item, convert)" [disabled]="convert?!canConvert(item,'Q'):!canInsertAfter(item, 'Q')"><strong>Q</strong> Quadratic Bezier Curve to</button>
-        <button mat-menu-item (click)="insert('T', item, convert)" [disabled]="convert?!canConvert(item,'T'):!canInsertAfter(item, 'T')"><strong>T</strong> Shorthand Quadratic Bezier Curve to</button>
-        <button mat-menu-item (click)="insert('A', item, convert)" [disabled]="convert?!canConvert(item,'A'):!canInsertAfter(item, 'A')"><strong>A</strong> Elliptical Arc</button>
-        <button mat-menu-item (click)="insert('Z', item, convert)" [disabled]="convert?!canConvert(item,'Z'):!canInsertAfter(item, 'Z')"><strong>Z</strong> Close Path</button>
+        <button mat-menu-item (click)="insert('M', item, convert)" [disabled]="convert?!canConvert(item,'M'):!canInsertAfter(item, 'M')"><strong>M</strong> 移动到</button>
+        <button mat-menu-item (click)="insert('L', item, convert)" [disabled]="convert?!canConvert(item,'L'):!canInsertAfter(item, 'L')"><strong>L</strong> 直线</button>
+        <button mat-menu-item (click)="insert('V', item, convert)" [disabled]="convert?!canConvert(item,'V'):!canInsertAfter(item, 'V')"><strong>V</strong> 垂直直线</button>
+        <button mat-menu-item (click)="insert('H', item, convert)" [disabled]="convert?!canConvert(item,'H'):!canInsertAfter(item, 'H')"><strong>H</strong> 水平直线</button>
+        <button mat-menu-item (click)="insert('A', item, convert)" [disabled]="convert?!canConvert(item,'A'):!canInsertAfter(item, 'A')"><strong>A</strong> 弧线</button>
+        <button mat-menu-item (click)="insert('C', item, convert)" [disabled]="convert?!canConvert(item,'C'):!canInsertAfter(item, 'C')"><strong>C</strong> 贝塞尔曲线</button>
+        <button mat-menu-item (click)="insert('S', item, convert)" [disabled]="convert?!canConvert(item,'S'):!canInsertAfter(item, 'S')"><strong>S</strong> 简型贝塞尔曲线</button>
+        <button mat-menu-item (click)="insert('Q', item, convert)" [disabled]="convert?!canConvert(item,'Q'):!canInsertAfter(item, 'Q')"><strong>Q</strong> 二次贝塞尔曲线</button>
+        <button mat-menu-item (click)="insert('T', item, convert)" [disabled]="convert?!canConvert(item,'T'):!canInsertAfter(item, 'T')"><strong>T</strong> 简型二次贝塞尔曲线</button>
+        <button mat-menu-item (click)="insert('Z', item, convert)" [disabled]="convert?!canConvert(item,'Z'):!canInsertAfter(item, 'Z')"><strong>Z</strong> 闭合路径</button>
     </ng-template>
 </mat-menu>
 

@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>分享文件</h1>
+<h1 mat-dialog-title>链接分享</h1>
 <div mat-dialog-content>
   <div style="display: flex;">
     <app-path-preview [path]="data.path ?? ''"></app-path-preview>
     <div style="padding:0 32px; flex:1">
-      <p>您可以使用以下链接共享当前文件：</p>
+      <p>您可以使用以下链接分享当前 Path：</p>
       <mat-form-field style="width: 100%;">
-        <mat-label>链接</mat-label>
+        <mat-label>URL</mat-label>
         <input matInput readonly [ngModel]="getUrl()" #input>
         <button mat-icon-button matSuffix matTooltip="复制到剪贴板" (click)="copy()">
           <mat-icon>content_pasted</mat-icon>

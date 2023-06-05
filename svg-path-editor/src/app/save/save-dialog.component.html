@@ -1,14 +1,14 @@
-<h1 mat-dialog-title>保存文件</h1>
+<h1 mat-dialog-title>保存项目</h1>
 <div mat-dialog-content>
   <mat-form-field style="width: 100%;">
     <mat-label>名称</mat-label>
     <input matInput [(ngModel)]="data.name" cdkFocusInitial>
   </mat-form-field>
   <p *ngIf="storageService.hasPath(data.name)">
-    存在同名文件，使用<i>替换</i>来覆盖已有文件。
+    存在同名项目，使用"<strong>替换</strong>"将覆盖原有项目。
   </p>
   <p *ngIf="!storageService.hasPath(data.name)">
-    使用<i>保存</i>将当前文件保存在您的浏览器中。
+    使用"<strong>保存</strong>"将当前项目保存在您的浏览器中。
   </p>
 </div>
 <div mat-dialog-actions align="end">
