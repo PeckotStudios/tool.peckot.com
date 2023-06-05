@@ -2,8 +2,8 @@
     "version": 2,
     "redirects": [
         {
-            "source": "/([^\/]+)(?:(?<=\/)(.*))",
-            "destination": "/$1/$2"
+            "source": "/([^\/]+)((?<=\/)(.*))",
+            "destination": "/$1/$3"
         }
     ]
 }
