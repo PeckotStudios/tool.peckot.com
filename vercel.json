@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "redirect": [
+    "redirects": [
       {
         "source": "/svg-path-editor/?(.*)",
         "destination": "/svg-path-editor/$1"
