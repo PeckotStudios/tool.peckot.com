@@ -1,9 +1,15 @@
 {
     "version": 2,
+    "routes": [
+      {
+        "src": "/svg-path-editor/?(.*)",
+        "dest": "https://tool.peckot.com/svg-path-editor/$1"
+      }
+    ],
     "redirects": [
       {
-        "source": "/svg-path-editor/?(.*)",
-        "destination": "/svg-path-editor/$1"
+        "source": "/svg-path-editor/(.*)?",
+        "destination": "/svg-path-editor$1"
       }
     ]
   }
