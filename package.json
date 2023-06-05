@@ -1,0 +1,13 @@
+{
+  "name": "tool.peckot.com",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npm run build-sub",
+    "build-sub": "cd svg-path-editor && npm run build && cd ../"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Peckot-Studios/tool.peckot.com.git"
+  }
+}

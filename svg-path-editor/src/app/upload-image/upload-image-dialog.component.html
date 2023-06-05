@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>上传图片</h1>
+<div mat-dialog-content class="upload-image-dialog-content"
+  (drop)="onDrop($event)" (dragover)="onDragOver($event)"
+>
+  <div class="upload-button-row">
+    <button type="button" mat-raised-button (click)="fileInput.click()" (drop)="onDrop($event)">选择文件</button>
+    <img *ngIf="data" class="preview" [src]="displayableData" />
+    <span class="filename">{{name}}</span>
+  </div>
+  <mat-form-field>
+    <mat-label>X坐标</mat-label>
+    <input matInput [(ngModel)]="x">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Y坐标</mat-label>
+    <input matInput [(ngModel)]="y">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>宽度</mat-label>
+    <input matInput [(ngModel)]="width">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>高度</mat-label>
+    <input matInput [(ngModel)]="height">
+  </mat-form-field>
+  <div>
+      <mat-checkbox class="example-margin" [(ngModel)]="preserveAspectRatio">保持纵横比</mat-checkbox>
+  </div>
+  <input hidden (change)="onFileSelected(fileInput)" accept="image/*" #fileInput type="file">
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button (click)="onCancel()" color="primary">取消</button>
+  <button mat-raised-button (click)="onUploadImage()" color="accent" [disabled]="!data">导入</button>
+</div>
