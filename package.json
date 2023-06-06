@@ -1,13 +1,27 @@
 {
   "name": "tool.peckot.com",
   "version": "1.0.0",
-  "description": "",
+  "description": "Online tools",
   "scripts": {
-    "build": "npm run build-sub",
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build --outDir dist && npm run build-sub",
     "build-sub": "cd svg-path-editor && npm install && npm run build && cd ../"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Peckot-Studios/tool.peckot.com.git"
+  },
+  "dependencies": {
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "autoprefixer": "^10.4.14",
+    "daisyui": "^3.0.3",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9",
+    "vue-tsc": "^1.4.2"
   }
 }
